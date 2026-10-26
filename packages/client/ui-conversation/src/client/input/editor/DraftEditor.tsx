@@ -21,6 +21,10 @@ export interface DraftEditorProps {
   readonly onWorkspaceKeyDown: KeyboardEventHandler<HTMLDivElement>
   readonly hint: string | null
   readonly showPlaceholder: boolean
+  /** Ghost suggestion for the empty draft; null hides it. */
+  readonly suggestion: string | null
+  /** Localized keycap label that accepts the suggestion. */
+  readonly suggestionAccept: string
 }
 
 /**
@@ -30,7 +34,7 @@ export interface DraftEditorProps {
  */
 export function DraftEditor({
   classNames: css, editor, scrollRef, editable, editorDisabled, phase, placeholderText, ariaLabel,
-  workspaceTrigger, workspacePickerOpen, onWorkspaceKeyDown, hint, showPlaceholder,
+  workspaceTrigger, workspacePickerOpen, onWorkspaceKeyDown, hint, showPlaceholder, suggestion, suggestionAccept,
 }: DraftEditorProps): ReactNode {
   return (
     <div ref={scrollRef} className={css.scroll} data-input-scroll>
@@ -54,6 +58,12 @@ export function DraftEditor({
         {showPlaceholder && (
           <div aria-hidden className={css.placeholder} data-composer-placeholder>
             {placeholderText}
+          </div>
+        )}
+        {suggestion !== null && (
+          <div aria-hidden className={css.suggestion} data-composer-suggestion>
+            <span className={css.suggestionText}>{suggestion}</span>
+            <kbd className={css.suggestionKey}>{suggestionAccept}</kbd>
           </div>
         )}
         <DecoratorPortals editor={workspaceTrigger ? null : editor} />

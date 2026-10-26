@@ -116,6 +116,8 @@ export class SessionInputShell implements SessionInput {
   readonly state: SnapshotStore<InputState>
   /** Latest surfaced notice (null after clear); the bar renders errors as banners and information inline. */
   readonly notices: SnapshotStore<InputNotice | null> = createSnapshotStore<InputNotice | null>(null)
+  /** Ghost-text suggestion for an empty draft; Tab accepts it (null when none). */
+  readonly suggestion: SnapshotStore<string | null> = createSnapshotStore<string | null>(null)
   /** The shell-owned editor (text + chip truth); the composer binds its contenteditable to it. */
   get editor(): LexicalEditor {
     return this.draftEditor.editor
@@ -384,6 +386,7 @@ export class SessionInputShell implements SessionInput {
    */
   submit(mode: InputSubmitMode = 'queue', source?: 'click' | 'enter'): void {
     if (this.disposed) return
+    this.suggestion.set(null)
     const timestamp = Date.now()
     let state: MessageSubmissionState | undefined
     if (this.snapshot.phase === 'plain' && (this.snapshot.draft.trim() !== '' || this.attachmentIds.length > 0)) {
@@ -438,7 +441,32 @@ export class SessionInputShell implements SessionInput {
    * @returns the menu's verdict; 'pass' when no pipeline is mounted.
    */
   arbitrate(key: ArbitrateKey, composing: boolean): ArbitrateOutcome {
-    return this.deps.inputTriggers?.()?.arbitrate(key, composing) ?? 'pass'
+    const outcome = this.deps.inputTriggers?.()?.arbitrate(key, composing) ?? 'pass'
+    if (outcome !== 'pass') return outcome
+    if (key === 'tab' && this.acceptSuggestion()) return 'consumed'
+    return 'pass'
+  }
+
+  /**
+   * Replace or clear the ghost-text suggestion.
+   * @param text - suggestion body, or null to clear it.
+   */
+  setSuggestion(text: string | null): void {
+    if (this.disposed) return
+    this.suggestion.set(text)
+  }
+
+  /**
+   * Accept the staged suggestion into an empty draft. The suggestion stays
+   * staged so clearing the draft brings it back, matching the ghost-text
+   * behavior the composer shows between keystrokes.
+   * @returns whether a suggestion was accepted.
+   */
+  private acceptSuggestion(): boolean {
+    const text = this.suggestion.getSnapshot()
+    if (text === null || this.snapshot.draft !== '') return false
+    this.setDraft(text)
+    return true
   }
 
   /**

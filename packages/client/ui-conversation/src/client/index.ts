@@ -103,6 +103,7 @@ export type {
 } from './contract/input.ts'
 export type { ArbitrateKey, ArbitrateOutcome, DraftInput, DraftReference, DraftSnapshot, ReferenceInsert, TokenSpan } from './contract/draft-editor.ts'
 export type { ComposerBlock, ComposerBlocks } from './contract/composer-blocks.ts'
+export type { ComposerSuggestions } from './contract/suggestions.ts'
 
 declare module '@deepseek-ai/cordis' {
   interface Context {
@@ -110,5 +111,7 @@ declare module '@deepseek-ai/cordis' {
     conversation: import('./service.ts').IConversation
     /** Target-neutral Conversation registries and per-Session assembly. */
     uiConversation: import('./conversation/assembly.ts').UiConversation
+    /** Stages the composer's ghost suggestion for one Session from any plugin. */
+    composerSuggestions: import('./contract/suggestions.ts').ComposerSuggestions
   }
 }

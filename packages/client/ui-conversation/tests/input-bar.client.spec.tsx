@@ -215,6 +215,7 @@ function bench(over?: BenchOptions) {
     useNotices: bindSnapshotSelector(shell.notices),
     useLexicon: bindSnapshotSelector(shell.lexicon),
     useMenuLauncher: bindSnapshotSelector(menuLauncher),
+    useSuggestion: bindSnapshotSelector(shell.suggestion),
     stop,
     // Mirrors the real lookup chain (conversation namespace, then common).
     t: over?.t ?? makeTranslate(zh, commonZh),
@@ -1912,4 +1913,40 @@ it('places context usage below the composer and hides it until the activity clos
   fireEvent.click(view.getByRole('button', { name: '上下文已用 25%' }))
   expect(view.getByRole('dialog', { name: '上下文已用' })).toBeTruthy()
   expect(view.getByRole('button', { name: '发送消息' })).toBeTruthy()
+})
+
+describe('composer ghost suggestion', () => {
+  it('renders a staged suggestion in the placeholder layer and accepts it with Tab', () => {
+    const { view, textarea, shell } = bench()
+    expect(view.container.querySelector('[data-composer-suggestion]')).toBeNull()
+    act(() => { shell.setSuggestion('核对 #966 的 11 个文件差异') })
+    const ghost = view.container.querySelector('[data-composer-suggestion]')
+    expect(ghost?.textContent).toContain('核对 #966 的 11 个文件差异')
+    expect(ghost?.querySelector('kbd')?.textContent).toBe('Tab')
+    expect(view.container.querySelector('[data-composer-placeholder]')).toBeNull()
+    fireEvent.keyDown(textarea, { key: 'Tab', keyCode: 9 })
+    expect(shell.snapshot.draft).toBe('核对 #966 的 11 个文件差异')
+    expect(view.container.querySelector('[data-composer-suggestion]')).toBeNull()
+  })
+
+  it('keeps the ghost hidden once the draft has text and leaves Tab alone', () => {
+    const { view, textarea, shell } = bench({ draft: '已经写下的内容' })
+    act(() => { shell.setSuggestion('核对 #966 的 11 个文件差异') })
+    expect(view.container.querySelector('[data-composer-suggestion]')).toBeNull()
+    fireEvent.keyDown(textarea, { key: 'Tab', keyCode: 9 })
+    expect(shell.snapshot.draft).toBe('已经写下的内容')
+  })
+})
+
+describe('composer ghost suggestion persistence', () => {
+  it('brings the ghost back after the accepted draft is deleted', () => {
+    const { view, textarea, shell } = bench()
+    act(() => { shell.setSuggestion('核对 #966 的 11 个文件差异') })
+    fireEvent.keyDown(textarea, { key: 'Tab', keyCode: 9 })
+    expect(shell.snapshot.draft).toBe('核对 #966 的 11 个文件差异')
+    expect(view.container.querySelector('[data-composer-suggestion]')).toBeNull()
+    act(() => { shell.setDraft('') })
+    expect(view.container.querySelector('[data-composer-suggestion]')?.textContent)
+      .toContain('核对 #966 的 11 个文件差异')
+  })
 })

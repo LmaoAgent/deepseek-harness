@@ -1,0 +1,7 @@
+# Loader overlay for the experimental next-step predictor (`dsh web --patch`):
+# mount the Host predictor and its browser ghost-text feed.
+- insert:
+    - id: next-step
+      name: '@deepseek-ai/dsh-experimental-next-step'
+    - id: client-ui-next-step
+      name: '@deepseek-ai/dsh-experimental-client-ui-next-step'

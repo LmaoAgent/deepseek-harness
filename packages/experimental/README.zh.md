@@ -65,6 +65,8 @@ kind: "package-group"
 | [`client-ui-agent-team`](client-ui-agent-team/README.zh.md) | Web Team roster、任务板与 teammate 导航 | — |
 | [`auto-review`](auto-review/README.zh.md) | 显式 Web 层，在每个原生或 PTC inner 工具调用前使用同一模型审查 | — |
 | [`claude-code-mods`](claude-code-mods/README.zh.md) | 把 Claude Code 模组作为插件运行：钩子链落在 harness 扩展点上，并在提示框上方绘制横幅 | `ctx.claudeCodeMods` |
+| [`next-step`](next-step/README.zh.md) | 每个已结束回合用一次廉价模型调用预测下一句，作为输入框灰字推送 | `ctx.nextStep` |
+| [`client-ui-next-step`](client-ui-next-step/README.zh.md) | 把该流暂存进输入框的浏览器半边 | — |
 | [`client-ui-claude-code-mods`](client-ui-claude-code-mods/README.zh.md) | 在提示框上方绘制模组树并把按钮点击发回的 Web 横幅 | — |
 | [`ptc-runtime-python`](ptc-runtime-python/README.zh.md) | PTC 执行 seam 的 CPython 子进程后端 | `ctx.ptcRuntime` |
 | [CUA](cua/README.zh.md) | 共享应用与窗口对象、授权和已记录的执行。 | 库 |

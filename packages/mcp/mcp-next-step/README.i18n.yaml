@@ -1,0 +1,37 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/mcp/mcp-next-step/README.md
+/:
+  en: f6971def20e08d65
+  zh: f6971def20e08d65
+/deepseek-ai-dsh-mcp-next-step:
+  en: 5e1c2c954a5b5be8
+  zh: fa6121935b94dc00
+/deepseek-ai-dsh-mcp-next-step/summary:
+  en: aa1389dddbbcdd51
+  zh: 5222da215e696d46
+/deepseek-ai-dsh-mcp-next-step/table-of-contents:
+  en: 4587363bab5af386
+  zh: 34d0d094e3c3700e
+/deepseek-ai-dsh-mcp-next-step/use-this-package:
+  en: 045af3904a9050bb
+  zh: 045541a37e152dfd
+/deepseek-ai-dsh-mcp-next-step/configure:
+  en: 8ddf5a180e4cd16e
+  zh: f20cdb79d78690da
+/deepseek-ai-dsh-mcp-next-step/understand-the-implementation:
+  en: 817f9a9e68cf2125
+  zh: b1e2704589edc607
+/deepseek-ai-dsh-mcp-next-step/model-experience:
+  en: 1f4e955a0350984d
+  zh: d8367aae69f55a8f
+/deepseek-ai-dsh-mcp-next-step/model-experience/kv-cache-effect:
+  en: ad5750100df6a1ff
+  zh: ad5750100df6a1ff
+/deepseek-ai-dsh-mcp-next-step/known-limitations-and-deferred-work:
+  en: 3684b0c3225533e9
+  zh: b2bad6cc639c026b
+/deepseek-ai-dsh-mcp-next-step/known-limitations-and-deferred-work/dev-note:
+  en: e67f633dc6fe7773
+  zh: 3bb0c20c93f16f98

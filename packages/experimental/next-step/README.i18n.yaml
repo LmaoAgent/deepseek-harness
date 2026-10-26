@@ -1,0 +1,43 @@
+# Bilingual-pair consistency record for README.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write packages/experimental/next-step/README.md
+/:
+  en: cf1414b194db4af0
+  zh: cf1414b194db4af0
+/deepseek-ai-dsh-experimental-next-step:
+  en: dbf5788b7aeff315
+  zh: 1879f81f76241ddf
+/deepseek-ai-dsh-experimental-next-step/summary:
+  en: 876ca1eeabad8f4e
+  zh: 9e0be3cd5b672bbc
+/deepseek-ai-dsh-experimental-next-step/table-of-contents:
+  en: 3460b3e585e0c020
+  zh: 3460b3e585e0c020
+/deepseek-ai-dsh-experimental-next-step/use-this-package:
+  en: 125fef3903c4febd
+  zh: 60df5d1dc774e1fd
+/deepseek-ai-dsh-experimental-next-step/understand-the-implementation:
+  en: e5fc66d79bd02423
+  zh: a66461ed98c62b6c
+/deepseek-ai-dsh-experimental-next-step/model-experience:
+  en: 215e7ba838619b7b
+  zh: 215e7ba838619b7b
+/deepseek-ai-dsh-experimental-next-step/model-experience/prediction-request:
+  en: 4faed043fadbeadb
+  zh: 4faed043fadbeadb
+/deepseek-ai-dsh-experimental-next-step/model-experience/prediction-request/what-the-model-sees:
+  en: 7b7851ea65952c7c
+  zh: 5d7b6ded7aa8b744
+/deepseek-ai-dsh-experimental-next-step/model-experience/prediction-request/token-effect:
+  en: 7a8e85c234057a63
+  zh: 8232d52db90cd859
+/deepseek-ai-dsh-experimental-next-step/model-experience/prediction-request/kv-cache-effect:
+  en: c0693c2bc9c41c9d
+  zh: 7d2319f03368b848
+/deepseek-ai-dsh-experimental-next-step/known-limitations-and-deferred-work:
+  en: 34a7f76b7f91ab0a
+  zh: e101ca1784d587a1
+/deepseek-ai-dsh-experimental-next-step/known-limitations-and-deferred-work/dev-note:
+  en: e67f633dc6fe7773
+  zh: 3bb0c20c93f16f98

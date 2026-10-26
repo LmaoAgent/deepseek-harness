@@ -213,6 +213,16 @@ export interface SessionInput extends InputTarget {
   focus(): void
   /** Input state store (InputZone currency + decorations read here). */
   readonly state: SnapshotStore<InputState>
+  /**
+   * Ghost-text suggestion for an empty draft; null when none is staged.
+   * A client plugin stages one through {@link SessionInput.setSuggestion}.
+   */
+  readonly suggestion: SnapshotStore<string | null>
+  /**
+   * Replace or clear the staged suggestion.
+   * @param text - suggestion body, or null to clear it.
+   */
+  setSuggestion(text: string | null): void
 }
 
 /** Session-addressed access to the per-session input facade. */
