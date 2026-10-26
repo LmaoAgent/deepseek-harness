@@ -48,7 +48,7 @@ export const InputBar = memo(function InputBar({
   retryFileUpload,
   toggleCommandMenu, stop, t,
   renderSlot, useBusyEnter, useFileUploads, useNotices, useLexicon, useMenuLauncher, useStopShortcut,
-  useProjection, sessionId, variant, disabled: inert = false, blocked,
+  useSuggestion, useProjection, sessionId, variant, disabled: inert = false, blocked,
   workspacePickerOpen = false, onRequestWorkspace,
   placeholder, accessory,
 }: InputBarProps) {
@@ -152,6 +152,9 @@ export const InputBar = memo(function InputBar({
   const workspaceTrigger = inert && !removed && onRequestWorkspace !== undefined
   const editorDisabled = removed || (locked && !workspaceTrigger)
   const editable = live && !locked && !machineBusy
+  const stagedSuggestion = useSuggestion(s => s)
+  // Ghost text only occupies an empty, editable composer; any draft hides it.
+  const suggestion = draft === '' && editable ? stagedSuggestion : null
   const steeringAvailable = subagent === null || subagent.address.mode === 'continuable'
   const canSteerQueue = !locked && !machineBusy && !commandMenuOpen && empty && running && steeringAvailable
     && input.queue.length > 0
@@ -434,7 +437,9 @@ export const InputBar = memo(function InputBar({
           workspacePickerOpen={workspacePickerOpen}
           onWorkspaceKeyDown={onWorkspaceKeyDown}
           hint={hint}
-          showPlaceholder={draft === '' && attachments.length === 0 && !claimActive}
+          suggestion={suggestion}
+          suggestionAccept={t('suggestion.accept')}
+          showPlaceholder={draft === '' && attachments.length === 0 && !claimActive && suggestion === null}
         />
         <div ref={rowRef} className={css.row}>
           <div className={css.tools} hidden={activity}>

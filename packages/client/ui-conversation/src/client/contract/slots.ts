@@ -479,6 +479,8 @@ export interface ComposerBarInjected {
     notices: ObservableSnapshot<InputNotice | null>
     lexicon: ObservableSnapshot<ReadonlyMap<'/' | '@', readonly string[]>>
     menuLauncher: ObservableSnapshot<string | null>
+    /** Ghost-text suggestion for the empty draft; null when none is staged. */
+    suggestion: ObservableSnapshot<string | null>
   }
 }
 

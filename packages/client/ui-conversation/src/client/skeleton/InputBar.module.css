@@ -226,6 +226,37 @@
   user-select: none;
 }
 
+/* Ghost suggestion: the predicted next message on the placeholder layer, with
+   the accept keycap at its tail. Same inset as the placeholder it replaces. */
+.suggestion {
+  position: absolute;
+  inset: 4px 8px auto 14px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--dsw-alias-label-caption);
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.suggestionText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestionKey {
+  flex: none;
+  padding: 0 4px;
+  border: 0.5px solid var(--dsw-alias-border-l2);
+  border-radius: var(--dsw-radius-sm);
+  font: inherit;
+  font-size: 11px;
+  line-height: 16px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
 .inputDisabled {
   color: var(--dsw-alias-label-tertiary);
   cursor: not-allowed;

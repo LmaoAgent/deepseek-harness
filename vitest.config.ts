@@ -378,6 +378,11 @@ export default defineConfig({
         // cover and remove with the client test lane above.
         'packages/interaction/commands/src/index.ts',
         'packages/session/session-projection/src/index.ts',
+        // The MCP stdio entry runs only as a spawned child process: importing
+        // it in-process would start reading the test runner's stdin, and v8
+        // coverage never measures child processes. tests/bin.spec.ts pins the
+        // real entry end to end.
+        'packages/mcp/mcp-next-step/src/bin.ts',
         ...windowsUnsupportedCoveragePackages.map(path => `${path}/src/**/*.ts`),
         ...windowsOnlyCoverageExclusions,
         ...windowsRunnerCoverageExclusions,

@@ -65,6 +65,8 @@ Promotion requires a named product role, documented public behavior and limitati
 | [`client-ui-agent-team`](client-ui-agent-team/README.md) | Team roster, task board, and teammate navigation for Web | — |
 | [`auto-review`](auto-review/README.md) | Explicit Web layer for same-model review before each native or PTC inner tool call | — |
 | [`claude-code-mods`](claude-code-mods/README.md) | Run Claude Code mods as plugins: their hook chains on harness extension points and a band above the prompt | `ctx.claudeCodeMods` |
+| [`next-step`](next-step/README.md) | One cheap model call after each finished turn, streamed as composer ghost text | `ctx.nextStep` |
+| [`client-ui-next-step`](client-ui-next-step/README.md) | Browser half that stages that stream in the composer | — |
 | [`client-ui-claude-code-mods`](client-ui-claude-code-mods/README.md) | The Web band that draws a mod's tree above the prompt and sends button clicks back | — |
 | [`ptc-runtime-python`](ptc-runtime-python/README.md) | CPython subprocess backend for the PTC execution seam | `ctx.ptcRuntime` |
 | [CUA](cua/README.md) | Shared application/window objects, consent, and logged execution. | Library |
